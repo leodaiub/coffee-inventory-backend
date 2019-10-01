@@ -6,48 +6,48 @@ module.exports = {
   async store(req, res) {
     const { name, costPrice, sellingPrice, quantity } = req.body;
 
-    const Inventory = await Inventory.create({
+    const inventory = await Inventory.create({
       name,
       costPrice,
       sellingPrice,
       quantity
     });
 
-    return res.json(Inventory);
+    return res.json(inventory);
   },
 
   // --- READ --- //
 
   async index(req, res) {
-    const Inventory = await Inventory.find().sort("-createdAt");
-    return res.json(Inventory);
+    const inventory = await Inventory.find().sort("-createdAt");
+    return res.json(inventory);
   },
 
   // --- READ BY ID --- //
 
   async findById(req, res) {
-    const Inventory = await Inventory.findById(req.params.id);
-    return res.status(200).send(Inventory);
+    const inventory = await Inventory.findById(req.params.id);
+    return res.status(200).send(inventory);
   },
 
   // --- UPDATE --- //
 
   async update(req, res) {
-    const Inventory = await Inventory.findByIdAndUpdate(
+    const inventory = await Inventory.findByIdAndUpdate(
       req.params.id,
       req.body
     );
     return res
       .status(200)
-      .send({ message: "Inventory successfully updated", Inventory });
+      .send({ message: "Inventory successfully updated", inventory });
   },
 
   // --- DELETE --- //
 
   async delete(req, res) {
-    const Inventory = await Inventory.findByIdAndDelete(req.params.id);
+    const inventory = await Inventory.findByIdAndDelete(req.params.id);
     return res
       .status(200)
-      .send({ message: "Inventory successfully deleted!", Inventory });
+      .send({ message: "Inventory successfully deleted!", inventory });
   }
 };

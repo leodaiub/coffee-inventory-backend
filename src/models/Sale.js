@@ -8,7 +8,8 @@ const saleSchema = new Schema(
         ref: "Inventory"
       }
     ],
-    price: Number
+    price: Number,
+    quantity: Number
   },
   {
     timestamps: true,
@@ -16,4 +17,4 @@ const saleSchema = new Schema(
   }
 );
 
-module.exports = model("Sale", inventorySchema);
+module.exports = model("Sale", saleSchema);
