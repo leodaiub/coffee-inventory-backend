@@ -17,6 +17,8 @@ routes.get("/products/:id", inventoryController.findById);
 routes.put("/products/:id", inventoryController.update);
 //DELETE PRODUCT
 routes.delete("/products/:id", inventoryController.delete);
+//DELETE ALL PRODUCT
+routes.delete("/products", inventoryController.deleteAll);
 
 // ---- SALES ---- //
 //CREATE NEW SALE
@@ -29,6 +31,8 @@ routes.get("/sales/:id", salesController.findById);
 routes.put("/sales/:id", salesController.update);
 //DELETE SALE
 routes.delete("/sales/:id", salesController.delete);
+//DELETE ALL SALES
+routes.delete("/sales", salesController.deleteAll);
 
 // // ---- MONEY ---- //
 // //CREATE NEW MONEY

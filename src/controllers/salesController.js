@@ -5,17 +5,21 @@ module.exports = {
   // --- CREATE --- //
 
   async store(req, res) {
-    const { item, price } = req.body;
+    let { item, price, itemName, quantity } = req.body;
 
-    for (let i = 0; i < item.length; i++) {
-      let itens = await Item.findByIdAndUpdate(item[i], {
-        $inc: { quantity: -1 }
-      });
-    }
+    const itens = await Item.findByIdAndUpdate(item, {
+      $inc: { quantity: -quantity }
+    });
+
+    const name = await Item.findById(item, "name sellingPrice").exec();
+    itemName = name.name;
+    price = name.sellingPrice;
 
     const sale = await Sale.create({
       item,
-      price
+      price,
+      itemName,
+      quantity
     });
 
     return res.json(sale);
@@ -46,6 +50,15 @@ module.exports = {
 
   async delete(req, res) {
     const sale = await Sale.findByIdAndDelete(req.params.id);
+    return res
+      .status(200)
+      .send({ message: "sale successfully deleted!", sale });
+  },
+
+  // --- DELETE all --- //
+
+  async deleteAll(req, res) {
+    const sale = await Sale.deleteMany({});
     return res
       .status(200)
       .send({ message: "sale successfully deleted!", sale });

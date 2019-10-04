@@ -49,5 +49,14 @@ module.exports = {
     return res
       .status(200)
       .send({ message: "Inventory successfully deleted!", inventory });
+  },
+
+  // --- DELETE all --- //
+
+  async deleteAll(req, res) {
+    const sale = await Inventory.deleteMany({});
+    return res
+      .status(200)
+      .send({ message: "Inventory successfully deleted!", sale });
   }
 };
